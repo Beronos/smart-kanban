@@ -37,31 +37,41 @@
   }
 
   .add-task {
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
 
-  input {
-    flex: 1;
-    padding: 0.4rem 0.6rem;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    font-size: 0.9rem;
-  }
+    input {
+        flex: 1;
+        padding: 0.4rem 0.6rem;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        font-size: 0.9rem;
+    }
 
-  button {
-    padding: 0.4rem 0.8rem;
-    border-radius: 4px;
-    border: none;
-    background: #1976d2;
-    color: #fff;
-    font-size: 0.85rem;
-    cursor: pointer;
-  }
+    button {
+        padding: 0.4rem 0.8rem;
+        border-radius: 4px;
+        border: none;
+        background: #1976d2;
+        color: #fff;
+        font-size: 0.85rem;
+        cursor: pointer;
+    }
 
-  button:hover {
-    background: #1565c0;
-  }
+    button:hover {
+        background: #1565c0;
+    }
 }
+
+    .task-title[contenteditable="true"] {
+        outline: none;
+        cursor: text;
+    }
+
+    .task-title[contenteditable="true"]:focus {
+        border-bottom: 1px solid #aaa;
+    }
+
 
 }
