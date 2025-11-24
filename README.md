@@ -57,3 +57,28 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+
+Generate ngrx CRUD actions for a task
+
+answer:
+
+export const addTask = createAction(
+  '[Task] Add Task',
+  props<{ id: string; title: string }>()
+);
+
+export const updateTask = createAction(
+  '[Task] Update Task',
+  props<{ taskId: string; title: string }>()
+);
+
+export const updateTaskStatus = createAction(
+  '[Kanban] Update Task Status',
+  props<{ taskId: string; status: TaskStatus }>()
+);
+
+export const deleteTask = createAction(
+  '[Kanban] Delete Task',
+  props<{ taskId: string }>()
+);
