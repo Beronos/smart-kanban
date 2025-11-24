@@ -4,7 +4,7 @@ import { TaskBoard } from './kanban/task-board/task-board';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, TaskBoard],
+  imports: [TaskBoard],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
