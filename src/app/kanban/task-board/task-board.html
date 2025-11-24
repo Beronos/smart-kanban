@@ -5,16 +5,52 @@
   </div>
 
   <div class="board_columns">
+
     <div class="board_column">
       <h2>To Do</h2>
-    </div>
 
+      @if (todoTasks()) {
+        <ul class="task-list">
+          @for (task of todoTasks(); track task.id) {
+            <li>
+              <app-task-card [task]="task"></app-task-card>
+            </li>
+          } @empty {
+            <p class="empty-state">No tasks yet.</p>
+          }
+        </ul>
+      }
+    </div>
     <div class="board_column">
       <h2>In Progress</h2>
-    </div>
 
+      @if (inProgressTasks()) {
+        <ul class="task-list">
+          @for (task of inProgressTasks(); track task.id) {
+            <li>
+              <app-task-card [task]="task"></app-task-card>
+            </li>
+          } @empty {
+            <p class="empty-state">No tasks yet.</p>
+          }
+        </ul>
+      }
+    </div>
     <div class="board_column">
       <h2>Done</h2>
+
+      @if (doneTasks()) {
+        <ul class="task-list">
+          @for (task of doneTasks(); track task.id) {
+            <li>
+              <app-task-card [task]="task"></app-task-card>
+            </li>
+          } @empty {
+            <p class="empty-state">No tasks yet.</p>
+          }
+        </ul>
+      }
     </div>
+
   </div>
 </div>

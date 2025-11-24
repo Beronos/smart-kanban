@@ -1,0 +1,22 @@
+<div class="task-card">
+
+  <div class="task-title">
+    {{ task().title }}
+  </div>
+
+  <!-- Loading badge -->
+  @if (task().loadingPriority) {
+    <span class="badge badge--loading">Loading priority…</span>
+  }
+
+  <!-- Priority badge -->
+  @if (!task().loadingPriority && task().priority) {
+    <span class="badge badge--priority">{{ task().priority }}</span>
+  }
+
+  <!-- Error badge -->
+  @if (task().errorPriority) {
+    <span class="badge badge--error">{{ task().errorPriority }}</span>
+  }
+
+</div>
