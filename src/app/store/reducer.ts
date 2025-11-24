@@ -33,7 +33,7 @@ export const kanbanReducer = createReducer(
     tasks: state.tasks.filter(task => task.id !== taskId)
   })),
 
- on(TaskBoardActions.loadPriority, (state, { taskId }) => ({
+ on(TaskBoardActions.fetchPriority, (state, { taskId }) => ({
     ...state,
     tasks: state.tasks.map(task =>
       task.id === taskId
@@ -46,7 +46,7 @@ export const kanbanReducer = createReducer(
     )
   })),
 
-  on(TaskBoardActions.loadPrioritySuccess, (state, { taskId, priority }) => ({
+  on(TaskBoardActions.fetchPrioritySuccess, (state, { taskId, priority }) => ({
     ...state,
     tasks: state.tasks.map(t =>
       t.id === taskId
@@ -60,7 +60,7 @@ export const kanbanReducer = createReducer(
     )
   })),
 
-  on(TaskBoardActions.loadPriorityError, (state, { taskId, error }) => ({
+  on(TaskBoardActions.fetchPriorityError, (state, { taskId, error }) => ({
     ...state,
     tasks: state.tasks.map(t =>
       t.id === taskId

@@ -9,8 +9,8 @@ export const TaskBoardActions = createActionGroup({
     'Update Task Status': props<{ taskId: string; status: TaskStatus }>(),
     'Delete Task': props<{ taskId: string }>(),
 
-    'Load Priority': props<{ taskId: string }>(),
-    'Load Priority Success': props<{ taskId: string; priority: 'High' | 'Medium' | 'Low' }>(),
-    'Load Priority Error': props<{ taskId: string; error: string }>(),
+    'Fetch Priority': props<{ taskId: string }>(),
+    'Fetch Priority Success': props<{ taskId: string; priority: 'High' | 'Medium' | 'Low' }>(),
+    'Fetch Priority Error': props<{ taskId: string; error: string }>(),
   },
 });
