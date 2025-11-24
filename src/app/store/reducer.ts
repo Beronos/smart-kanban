@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
-import { initialKanbanState } from './state';
 import { TaskBoardActions } from './actions';
+import { initialKanbanState } from './state';
 
 
 export const kanbanReducer = createReducer(

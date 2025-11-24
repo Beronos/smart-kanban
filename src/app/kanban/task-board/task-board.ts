@@ -1,18 +1,16 @@
-import { Component, inject, signal } from '@angular/core';
-import { Column, Task } from '../../store/state-model';
-import { Store } from '@ngrx/store';
-import { selectTasksByStatus } from '../../store/selectors';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { TaskCard } from '../task-card/task-card';
-import { TaskBoardActions } from '../../store/actions';
-import { FormsModule } from '@angular/forms';
-import { 
-  CdkDragDrop, 
-  DragDropModule, 
-  moveItemInArray, 
-  transferArrayItem 
+import {
+  CdkDragDrop,
+  DragDropModule,
+  moveItemInArray
 } from '@angular/cdk/drag-drop';
-import { TaskStatus } from '../../store/state-model';
+import { Component, inject, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { FormsModule } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { TaskBoardActions } from '../../store/actions';
+import { selectTasksByStatus } from '../../store/selectors';
+import { Column, Task, TaskStatus } from '../../store/state-model';
+import { TaskCard } from '../task-card/task-card';
 
 @Component({
   selector: 'app-task-board',
@@ -71,15 +69,9 @@ export class TaskBoard {
 drop(event: CdkDragDrop<Task[]>, targetStatus: string): void {
   const newStatus = targetStatus as TaskStatus;
   const movedTask: Task = event.item.data.task; 
-  
-  // LOGGING FOR DEBUGGING
-  console.log('--- DROP EVENT ---');
-  console.log(`Source Column ID: ${event.previousContainer.id}`);
-  console.log(`Target Column ID: ${event.container.id}`);
-  console.log(`Target Status (via HTML parameter): ${newStatus}`); // Should match Target Column ID
+
   
   if (event.previousContainer === event.container) {
-    console.log('Action: Reordering within the same column');
     const tasksArray = event.container.data;
     moveItemInArray(
         tasksArray, 
