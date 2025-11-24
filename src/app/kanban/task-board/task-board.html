@@ -4,52 +4,40 @@
     <p>Smart task management with AI-assisted prioritization</p>
   </div>
 
-  <div class="board_columns">
+  <div class="board_columns"  cdkDropListGroup>
+    @for (column of columns(); track column.id) {
+      <div class="board_column">
+        <h2>{{ column.title }}</h2>
 
-    <div class="board_column">
-      <h2>To Do</h2>
-
-      <div class="add-task">
-        <input
-            type="text"
-            placeholder="Add a new task..."
-            [(ngModel)]="newTaskTitle"
-            (keydown.enter)="onAddTask()"
-        />
-        <button type="button" (click)="onAddTask()">Add</button>
-      </div>
-
-      <ul class="task-list">
-        @for (task of todoTasks(); track task.id) {
-            <app-task-card [task]="task"></app-task-card>
-        } @empty {
-            <p class="empty-state">No tasks yet.</p>
+        <!-- Add Task only in To Do column -->
+        @if (column.id === 'todo') {
+          <div class="add-task">
+            <input
+              type="text"
+              placeholder="Add a new task..."
+              [(ngModel)]="newTaskTitle"
+              (keydown.enter)="onAddTask()"
+            />
+            <button type="button" (click)="onAddTask()">Add</button>
+          </div>
         }
-      </ul>
-      
-    </div>
-    <div class="board_column">
-        <h2>In Progress</h2>
-        <ul class="task-list">
-            @for (task of inProgressTasks(); track task.id) {
-                <app-task-card [task]="task"></app-task-card>
-            } @empty {
-                <p class="empty-state">No tasks yet.</p>
-            }
-        </ul>
-    </div>
-    <div class="board_column">
-        <h2>Done</h2>
 
-        <ul class="task-list">
-            @for (task of doneTasks(); track task.id) {
-                <app-task-card [task]="task"></app-task-card>
-            } @empty {
+        <div
+          class="task-list"
+          cdkDropList
+          [cdkDropListData]="getTasksSignal(column.id)()"
+          [id]="column.id"
+          (cdkDropListDropped)="drop($event, column.id)"
+        >
+          @for (task of getTasksSignal(column.id)(); track task.id) {
+            <app-task-card
+              [task]="task"
+            ></app-task-card>
+          } @empty {
             <p class="empty-state">No tasks yet.</p>
-            }
-        </ul>
-      
-    </div>
-
+          }
+        </div>
+      </div>
+    }
   </div>
 </div>

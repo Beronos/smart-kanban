@@ -2,10 +2,11 @@ import { Component, inject, input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Task, TaskStatus } from '../../store/state-model';
 import { TaskBoardActions } from '../../store/actions';
+import { CdkDrag } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-task-card',
-  imports: [],
+  imports: [CdkDrag],
   templateUrl: './task-card.html',
   styleUrl: './task-card.scss',
 })

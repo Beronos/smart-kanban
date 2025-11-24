@@ -13,3 +13,8 @@ export interface Task {
 export interface KanbanState {
   tasks: Task[];
 }
+
+export interface Column {
+  id: TaskStatus;
+  title: string;
+}
