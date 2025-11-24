@@ -1,22 +1,37 @@
 <div class="task-card">
+  <div
+    class="task-title"
+    contenteditable="true"
+    [innerText]="task().title"
+    (blur)="handleBlur($event)"
+    (keydown.enter)="handleEnter($event)"
+  ></div>
 
-  <div class="task-title">
-    {{ task().title }}
-  </div>
-
-  <!-- Loading badge -->
   @if (task().loadingPriority) {
     <span class="badge badge--loading">Loading priority…</span>
   }
 
-  <!-- Priority badge -->
   @if (!task().loadingPriority && task().priority) {
     <span class="badge badge--priority">{{ task().priority }}</span>
   }
 
-  <!-- Error badge -->
+
   @if (task().errorPriority) {
     <span class="badge badge--error">{{ task().errorPriority }}</span>
   }
 
+  <div class="task-actions">
+    @if (task().status === 'todo') {
+      <button class="task-btn" (click)="moveTo('in-progress')">Move →</button>
+    } 
+    @else if (task().status === 'in-progress') {
+      <button class="task-btn" (click)="moveTo('todo')">← Back</button>
+      <button class="task-btn" (click)="moveTo('done')">Complete ✓</button>
+    } 
+    @else if (task().status === 'done') {
+      <button class="task-btn" (click)="moveTo('in-progress')">↺ Reopen</button>
+    }
+
+    <button class="task-btn task-btn--delete" (click)="onDelete()">Delete</button>
+  </div>
 </div>

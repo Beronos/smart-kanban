@@ -1,4 +1,4 @@
-import { createActionGroup, props } from "@ngrx/store";
+import { createActionGroup, emptyProps, props } from "@ngrx/store";
 import { TaskStatus } from "./state-model";
 
 export const TaskBoardActions = createActionGroup({
@@ -11,6 +11,6 @@ export const TaskBoardActions = createActionGroup({
 
     'Fetch Priority': props<{ taskId: string }>(),
     'Fetch Priority Success': props<{ taskId: string; priority: 'High' | 'Medium' | 'Low' }>(),
-    'Fetch Priority Error': props<{ taskId: string; error: string }>(),
+    'Fetch Priority Failure': props<{ taskId: string; error: string }>()
   },
 });

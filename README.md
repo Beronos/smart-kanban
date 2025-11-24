@@ -82,3 +82,76 @@ export const deleteTask = createAction(
   '[Kanban] Delete Task',
   props<{ taskId: string }>()
 );
+
+
+Generate selectors for tasks, that will get alltasks, tasks filtered by status, and task by Id
+
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { TaskStatus } from '../models/task-status.model';
+
+export interface Task {
+  id: string;
+  title: string;
+  status: TaskStatus;
+}
+
+export interface TaskBoardState {
+  tasks: Task[];
+}
+
+// 1) Feature selector
+export const selectTaskBoardState =
+  createFeatureSelector<TaskBoardState>('taskBoard');
+
+// 2) All tasks
+export const selectAllTasks = createSelector(
+  selectTaskBoardState,
+  (state) => state.tasks
+);
+
+// 3) Tasks filtered by status (factory selector)
+export const selectTasksByStatus = (status: TaskStatus) =>
+  createSelector(selectAllTasks, (tasks) =>
+    tasks.filter((task) => task.status === status)
+  );
+
+// 4) Task by id (factory selector)
+export const selectTaskById = (taskId: string) =>
+  createSelector(selectAllTasks, (tasks) =>
+    tasks.find((task) => task.id === taskId) ?? null
+  );
+
+
+introducde an AIPriorityService which returns a random priority of high, medium and low. Add a delay, and failure (low probability)
+
+
+import { Injectable } from '@angular/core';
+import { Observable, of, throwError } from 'rxjs';
+import { delay } from 'rxjs/operators';
+
+export type Priority = 'High' | 'Medium' | 'Low';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class KanbanPriorityService {
+  getPriority(): Observable<Priority> {
+    const priorities: Priority[] = ['High', 'Medium', 'Low'];
+    const randomIndex = Math.floor(Math.random() * priorities.length);
+    const priority = priorities[randomIndex];
+
+    // Simulate latency ~500–1200ms
+    const randomDelay = 500 + Math.floor(Math.random() * 700);
+
+    // Optional: simulate ~20% failure rate
+    const shouldFail = Math.random() < 0.2;
+
+    if (shouldFail) {
+      return throwError(() => new Error('AI service failed')).pipe(
+        delay(randomDelay)
+      );
+    }
+
+    return of(priority).pipe(delay(randomDelay));
+  }
+}

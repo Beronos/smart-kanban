@@ -35,4 +35,33 @@
       font-weight: 600;
     }
   }
+
+  .add-task {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+
+  input {
+    flex: 1;
+    padding: 0.4rem 0.6rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 0.9rem;
+  }
+
+  button {
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    border: none;
+    background: #1976d2;
+    color: #fff;
+    font-size: 0.85rem;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background: #1565c0;
+  }
+}
+
 }

@@ -4,6 +4,8 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideState, provideStore } from '@ngrx/store';
 import { kanbanReducer } from './store/reducer';
+import { provideEffects } from '@ngrx/effects';
+import { KanbanEffects } from './store/effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -11,6 +13,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideStore(),
-    provideState('kanban', kanbanReducer)
+    provideState('kanban', kanbanReducer),
+    provideEffects([KanbanEffects]),
   ]
 };

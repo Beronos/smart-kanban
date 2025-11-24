@@ -9,47 +9,46 @@
     <div class="board_column">
       <h2>To Do</h2>
 
-      @if (todoTasks()) {
-        <ul class="task-list">
-          @for (task of todoTasks(); track task.id) {
-            <li>
-              <app-task-card [task]="task"></app-task-card>
-            </li>
-          } @empty {
+      <div class="add-task">
+        <input
+            type="text"
+            placeholder="Add a new task..."
+            [(ngModel)]="newTaskTitle"
+            (keydown.enter)="onAddTask()"
+        />
+        <button type="button" (click)="onAddTask()">Add</button>
+      </div>
+
+      <ul class="task-list">
+        @for (task of todoTasks(); track task.id) {
+            <app-task-card [task]="task"></app-task-card>
+        } @empty {
             <p class="empty-state">No tasks yet.</p>
-          }
-        </ul>
-      }
+        }
+      </ul>
+      
     </div>
     <div class="board_column">
-      <h2>In Progress</h2>
-
-      @if (inProgressTasks()) {
+        <h2>In Progress</h2>
         <ul class="task-list">
-          @for (task of inProgressTasks(); track task.id) {
-            <li>
-              <app-task-card [task]="task"></app-task-card>
-            </li>
-          } @empty {
-            <p class="empty-state">No tasks yet.</p>
-          }
+            @for (task of inProgressTasks(); track task.id) {
+                <app-task-card [task]="task"></app-task-card>
+            } @empty {
+                <p class="empty-state">No tasks yet.</p>
+            }
         </ul>
-      }
     </div>
     <div class="board_column">
-      <h2>Done</h2>
+        <h2>Done</h2>
 
-      @if (doneTasks()) {
         <ul class="task-list">
-          @for (task of doneTasks(); track task.id) {
-            <li>
-              <app-task-card [task]="task"></app-task-card>
-            </li>
-          } @empty {
+            @for (task of doneTasks(); track task.id) {
+                <app-task-card [task]="task"></app-task-card>
+            } @empty {
             <p class="empty-state">No tasks yet.</p>
-          }
+            }
         </ul>
-      }
+      
     </div>
 
   </div>

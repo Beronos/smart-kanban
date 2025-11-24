@@ -3,7 +3,7 @@ import { KanbanState, TaskStatus } from './state-model';
 
 
 export const selectKanbanState =
-  createFeatureSelector<KanbanState>('taskBoard');
+  createFeatureSelector<KanbanState>('kanban');
 
 
 export const selectAllTasks = createSelector(

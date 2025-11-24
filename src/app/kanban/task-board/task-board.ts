@@ -4,15 +4,18 @@ import { Store } from '@ngrx/store';
 import { selectTasksByStatus } from '../../store/selectors';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { TaskCard } from '../task-card/task-card';
+import { TaskBoardActions } from '../../store/actions';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-task-board',
-  imports: [TaskCard],
+  imports: [TaskCard, FormsModule],
   templateUrl: './task-board.html',
   styleUrl: './task-board.scss',
 })
 export class TaskBoard { 
   private store = inject(Store)
+  newTaskTitle = '';
 
   todoTasks = toSignal(
     this.store.select(selectTasksByStatus('todo')),
@@ -28,4 +31,19 @@ export class TaskBoard {
     this.store.select(selectTasksByStatus('done')),
     { initialValue: [] }
   );
+
+  onAddTask(): void {
+    const title = this.newTaskTitle.trim();
+    if (!title) {
+      return;
+    }
+    const id = crypto.randomUUID(); 
+
+
+    this.store.dispatch(TaskBoardActions.addTask({ id, title }));
+    this.store.dispatch(TaskBoardActions.fetchPriority({ taskId: id }));
+
+
+    this.newTaskTitle = '';
+  }
 }
